@@ -1,0 +1,75 @@
+@import "libs/uikit-mixins";
+@import "libs/uikit-variables";
+
+$navbar-nav-height: 50px;
+$form-large-height: 50px;
+$button-large-height: 50px;
+$top-height: 84px;
+$bottom-height: 50px;
+
+body {
+    background: url(../img/bg.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+#main {
+    margin-top: -$top-height;
+    padding-top: $top-height;
+}
+
+
+#channel {
+    margin-bottom: -$bottom-height;
+    padding-bottom: $bottom-height;
+}
+
+#posts {
+    background: #fff;
+}
+
+#posts > li {
+    padding: $nav-padding-vertical $nav-padding-horizontal;
+}
+
+#posts > li > a {
+    padding: 0;
+    display: inline;
+    color: $base-link-color;
+    text-decoration: $base-link-text-decoration;
+    cursor: pointer;
+}
+
+#posts > li > a:hover,
+#posts > li > a:focus {
+    color: $base-link-hover-color;
+    text-decoration: $base-link-hover-text-decoration;
+    background: transparent;
+    outline: none;
+}
+
+#posts .nick-wrap {
+    color: $text-muted-color;
+}
+
+#posts .nick {
+    color: $text-warning-color;
+    font-weight: bold;
+}
+
+#posts .nick-self {
+    color: $text-primary-color;
+    font-weight: bold;
+}
+
+
+#chat .uk-autocomplete-results {
+    position: absolute;
+    bottom: 80px;
+    background-color: #ebf7fd;
+}
+
+@import "libs/nanoscroller";
+@import "libs/nprogress";
+@import "libs/uikit";
+@import "libs/components/sticky";
+@import "libs/components/autocomplete";

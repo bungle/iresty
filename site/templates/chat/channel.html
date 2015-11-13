@@ -1,0 +1,49 @@
+{% layout = not pjax and "layouts/master.html" %}
+<section id="channel" class="uk-height-1-1">
+    <div class="uk-flex" data-uk-sticky>
+        <div class="uk-flex-left uk-width-small-1-1 uk-width-medium-8-10">
+            <ul class="uk-nav uk-nav-side">
+                <li class="uk-active uk-text-large"><a href="#">Channel</a></li>
+            </ul>
+        </div>
+        <div class="uk-flex-right uk-hidden-small uk-width-medium-2-10 uk-panel-box-secondary">
+            <ul class="uk-nav uk-nav-side">
+                <li class="uk-active uk-text-large"><a href="#">Who's Online?</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="uk-flex uk-height-1-1">
+        <div class="uk-flex-left uk-width-small-1-1 uk-width-medium-8-10 uk-height-1-1">
+            <div class="nano uk-height-1-1">
+                <ul id="posts" class="nano-content uk-nav uk-nav-side uk-height-1-1">
+                </ul>
+            </div>
+        </div>
+        <div class="uk-flex-right uk-hidden-small uk-width-medium-2-10 uk-height-1-1 uk-panel-box-primary">
+            <div class="uk-height-1-1">
+                <div class="nano uk-height-1-1">
+                    <ul id="nicks" class="nano-content uk-height-1-1 uk-nav uk-nav-side uk-text-large">
+                        {% for _, nick in ipairs(nicks) do %}
+                        <li><a>{{nick}}</a></li>
+                        {% end %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form id="chat" action="post" class="uk-flex uk-form uk-margin-remove" data-uk-sticky="{ bottom: 0 }">
+        <div class="uk-flex-left uk-width-small-8-10 uk-width-medium-6-10">
+            <input id="nick" name="nick" type="hidden" value="{{nick}}">
+            <div id="autocomplete" class="uk-autocomplete uk-form uk-width-1-1" data-uk-autocomplete="{ source:'emojis.json' }">
+                <input id="post" name="post" type="text" class="uk-form-large uk-width-1-1" placeholder="Please, type a message">
+            </div>
+        </div>
+        <div class="uk-flex-right uk-width-small-2-10 uk-width-medium-2-10">
+            <button id="send" type="submit" class="uk-button uk-button-primary uk-button-large uk-width-1-1">Send</button>
+        </div>
+        <div class="uk-flex-right uk-hidden-small uk-width-medium-2-10">
+            <button id="exit" type="button" class="uk-button uk-button-danger uk-button-large uk-width-1-1">Disconnect</button>
+        </div>
+    </form>
+</section>
+<script>chat.init();</script>

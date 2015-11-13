@@ -1,0 +1,52 @@
+// LESS related
+@import "core/variables";
+
+// Defaults
+@import "core/base";
+
+// Layout
+@import "core/grid";
+@import "core/panel";
+@import "core/block";
+@import "core/article";
+@import "core/comment";
+@import "core/cover";
+
+// Navs
+@import "core/nav";
+@import "core/navbar";
+@import "core/subnav";
+@import "core/breadcrumb";
+@import "core/pagination";
+@import "core/tab";
+@import "core/thumbnav";
+
+// Elements
+@import "core/list";
+@import "core/description-list";
+@import "core/table";
+@import "core/form";
+
+// Common
+@import "core/button";
+@import "core/icon";
+@import "core/close";
+@import "core/badge";
+@import "core/alert";
+@import "core/thumbnail";
+@import "core/overlay";
+@import "core/column";
+@import "core/animation";
+
+// JavaScript
+@import "core/dropdown";
+@import "core/modal";
+@import "core/offcanvas";
+@import "core/switcher";
+
+// Need to be loaded last
+@import "core/text";
+@import "core/utility";
+@import "core/flex";
+@import "core/contrast";
+@import "core/print";

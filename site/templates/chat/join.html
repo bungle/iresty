@@ -1,0 +1,20 @@
+{% layout = not pjax and "layouts/master.html" %}
+<div id="join" class="uk-height-1-1 uk-width-1-1 uk-vertical-align uk-text-center">
+    <div class="uk-vertical-align-middle">
+        <form class="uk-panel uk-panel-box uk-panel-box-primary uk-form" method="post" action="/" data-pjax>
+            <h3 class="uk-panel-title">OpenResty Chat</h3>
+            <div class="uk-form-row">
+                <div class="uk-width-1-1">
+                    <div class="uk-form-icon">
+                        <i class="uk-icon-user"></i>
+                        <input class="uk-width-1-1 uk-form-large {{ form.nick:state('uk-form-danger', 'uk-form-success') }}" name="nick" type="text" placeholder="Nick" value="{{ form.nick.input }}" autofocus>
+                    </div>
+                    <p class="uk-form-help-block uk-text-muted"><small>Between two and ten characters</small></p>
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <button class="uk-width-1-1 uk-button uk-button-primary uk-button-large" href="#">Join</button>
+            </div>
+        </form>
+    </div>
+</div>
