@@ -13,10 +13,6 @@ route:use "template"
 
 route:with "equals"
 
-route "/test" {
-    get = function() ngx.print "世界你好" end
-}
-
 route:get("/", function(route)
     route:render "chat/join.html"
 end)
@@ -33,14 +29,13 @@ route:post("/", function(route)
         context.nick = nick
         context.nicks = nicks
         route:render "chat/channel.html"
+    else
+        context.form = form
+        route:to "/"
     end
-    context.form = form
-    route:to "/"
 end)
 
 route:websocket "/" {
-    -- remove upgrade on production
-    upgrade = function() end,
     connect = chat.connect,
     closing = chat.closing,
     text    = chat.text
