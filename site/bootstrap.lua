@@ -1,6 +1,5 @@
 local route        = require "resty.route".new()
 local validate     = require "app.validate"
-local chat         = require "app.chat"
 local db           = require "app.db"
 local autocomplete = require "app.emojis".autocomplete
 
@@ -35,11 +34,7 @@ route:post("/", function(self)
     end
 end)
 
-route:websocket "/" {
-    connect = chat.connect,
-    closing = chat.closing,
-    text    = chat.text
-}
+route:websocket "/" "app.chat"
 
 route:get("/emojis.json", function(self)
     self:json(autocomplete())
