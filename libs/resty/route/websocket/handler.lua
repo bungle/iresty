@@ -64,7 +64,7 @@ function handler:close()
     self:closing();
     local threads = self.threads
     if threads then
-        for _, v in ipairs(self.threads) do
+        for _, v in ipairs(threads) do
             kill(v)
         end
     end
