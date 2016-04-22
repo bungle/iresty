@@ -1,6 +1,6 @@
 local route        = require "resty.route".new()
-local validate     = require "app.validate"
-local db           = require "app.db"
+local validate     = require "app.validate".chat.join
+local nicks        = require "app.db".nicks
 local autocomplete = require "app.emojis".autocomplete
 
 route:use "ajax"
@@ -15,11 +15,11 @@ route:get("=/", function(self)
 end)
 
 route:post("=/", function(self)
-    local valid, form, _ = validate.chat.join(self.post)
+    local valid, form, _ = validate(self.post)
     if valid then
-        local nick, e = db.nicks.register(self.redis, form.nick.value)
+        local nick, e = nicks.register(self.redis, form.nick.value)
         if not nick then self:error(e) end
-        local nicks, e = db.nicks.all(self.redis)
+        local nicks, e = nicks.all(self.redis)
         if not nicks then self:error(e) end
         self.nick = nick
         self.nicks = nicks
