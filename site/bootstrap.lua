@@ -15,19 +15,17 @@ route:get("=/", function(self)
 end)
 
 route:post("=/", function(self)
-    local context = self.context
-    local redis = context.redis
-    local valid, form, _ = validate.chat.join(context.post)
+    local valid, form, _ = validate.chat.join(self.post)
     if valid then
-        local nick, e = db.nicks.register(redis, form.nick.value)
+        local nick, e = db.nicks.register(self.redis, form.nick.value)
         if not nick then self:error(e) end
-        local nicks, e = db.nicks.all(redis)
+        local nicks, e = db.nicks.all(self.redis)
         if not nicks then self:error(e) end
-        context.nick = nick
-        context.nicks = nicks
+        self.nick = nick
+        self.nicks = nicks
         self:render "chat/channel.html"
     else
-        context.form = form
+        self.form = form
         self:to "/"
     end
 end)
@@ -39,7 +37,7 @@ route:get("=/emojis.json", function(self)
 end)
 
 route:post("=/emojis.json", function(self)
-    self:json(autocomplete(self.context.post.search, 5))
+    self:json(autocomplete(self.post.search, 5))
 end)
 
 route:dispatch()

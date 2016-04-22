@@ -12,15 +12,15 @@ local ipairs       = ipairs
 local select       = select
 local mt, handler  = {}, {}
 local noop         = function() end
-function mt:__call(self, route, ...)
+function mt:__call(self, context, ...)
     local self = setmetatable(self, handler)
     self.n = select("#", ...)
     self.args = { ... }
-    self.route = route
-    self.context = route.context
+    self.context = context
+    self.route = context.route
     self:upgrade()
     local websocket, e = server:new(self)
-    if not websocket then route:error(e) end
+    if not websocket then self.route:error(e) end
     self.websocket = websocket
     abort(self.abort(self))
     self:connect()
@@ -38,13 +38,17 @@ function mt:__call(self, route, ...)
     self:close()
 end
 handler.__index = handler
+function handler:upgrading() end
+function handler:upgraded() end
 function handler:upgrade()
+    self:upgrading();
     local host = var.host
     local s =  #var.scheme + 4
     local e = #host + s - 1
     if sub(var.http_origin or "", s, e) ~= host then
         return self:forbidden()
     end
+    self:upgraded();
 end
 function handler:connect() end
 function handler:timeout()
@@ -64,7 +68,7 @@ function handler:close()
     self:closing();
     local threads = self.threads
     if threads then
-        for _, v in ipairs(threads) do
+        for _, v in ipairs(self.threads) do
             kill(v)
         end
     end
