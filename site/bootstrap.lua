@@ -2,7 +2,7 @@ local route        = require "resty.route".new()
 local validate     = require "app.validate".chat.join
 local nicks        = require "app.db".nicks
 local autocomplete = require "app.emojis".autocomplete
-Removed
+
 route:use "form"
 route:use "redis" {}
 route:use "reqargs" {}
