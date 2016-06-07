@@ -13,7 +13,7 @@ route:get("=/", function(self)
 end)
 
 route:post("=/", function(self)
-    local valid, form, _ = validate(self.post)
+    local valid, form = validate(self.post)
     if valid then
         local nick, e = nicks.register(self.redis, form.nick.value)
         if not nick then self:error(e) end

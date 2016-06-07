@@ -244,7 +244,7 @@ $(function() {
     var doc = $(document);
     doc.on('pjax:start', pjax.start);
     doc.on('pjax:end',   pjax.end);
-    doc.on('submit', 'form[data-pjax]', pjax.send);
+    doc.on('submit', 'form[data-pjax]', pjax.submit);
     doc.on('submit', '#chat', chat.post);
     doc.pjax('a[data-pjax]', '#main');
 });
